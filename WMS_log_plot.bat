@@ -10,6 +10,10 @@ for /f "tokens=3 delims= " %%i in (%1) do (
 	break
 )
 rem echo IP=%IP%
+if x%IP:[=%==x%IP% goto ERROR_LOG_FILE
+if x%IP:]=%==x%IP% goto ERROR_LOG_FILE
+if x%IP:.=%==x%IP% goto ERROR_LOG_FILE
+
 (
 	for /f "tokens=1,2,5,7 delims= " %%i in (%1) do (
 		if "%%k"=="Ping" (
@@ -23,6 +27,7 @@ rem echo IP=%IP%
 		)
 	)
 ) > %~dp0\log.dat
+for %%A in ("%~dp0\log.dat") do if %%~zA==0 goto ERROR_LOG_FILE
 rem pause 
 
 echo Plotting data, wait a moment ...
@@ -42,7 +47,7 @@ exit /b -1
 
 :ERROR_LOG_FILE
 echo ====================================================
-echo You need to check drop file is correct GDM log file.
+echo You need to check drop file is correct WMS log file.
 echo ====================================================
 timeout 30 > NUL
 exit /b -1
