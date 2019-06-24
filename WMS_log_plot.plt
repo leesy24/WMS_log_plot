@@ -16,7 +16,7 @@ set ytics nomirror
 set style line 1 lt rgb "red" lw 2
 set style line 2 lt rgb "blue" lw 1 pt 6
 set style line 3 lt rgb "green" lw 1 pt 4
-plot ARG1 u 1:($7>0?1:0) w steps ls 1 notitle, \
-     ''   u 1:($7>0?1:1/0) w linespoints ls 2 title 'Success', \
-     ''   u 1:($7>0?1/0:0) w linespoints ls 3 title 'Fail'
+plot ARG3 u 1:($3>0?1:0) w steps ls 1 notitle, \
+     ''   u 1:($3>0?1:1/0) w linespoints ls 2 title 'Success', \
+     ''   u 1:($3>0?1/0:0) w linespoints ls 3 title 'Fail'
 pause -1
